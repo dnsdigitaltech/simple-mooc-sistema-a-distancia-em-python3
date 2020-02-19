@@ -200,3 +200,88 @@ A minha view ficou com a seguinte função
 OBS: importei HttpResponse para poder retornar uma mensagem a página web
 
     return HttpResponse('Hello World')
+
+INTRODUÇÃO AOS TEMPLATES
+
+O que são templates?
+
+ - Arquivois de textos com algumas marcações especiais.
+ - Servem para gerar texto dinâmicamente, normalmente html.
+ - Contém variáveis que são atribuídas por seu valor, tags que irão controlar o fluxo da apresentação e filtros que irão manipular o resultado da avaliação das variáveis.
+
+ Exemplo de templates presente na documentação oficial https://docs.djangoproject.com/en/3.0/ref/templates/language/#variables
+
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <link rel="stylesheet" href="style.css">
+            <title>{% block title %}My amazing site{% endblock %}</title>
+        </head>
+
+        <body>
+            <div id="sidebar">
+                {% block sidebar %}
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                </ul>
+                {% endblock %}
+            </div>
+
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+        </body>
+    </html>
+
+OBS: A ideia do django é que você separa sua vizualização do código, por isto temos os templates.
+
+MTV - Model Templates View - esta é a base do django.
+
+OBS: Os TEMPLATES é a forma como os dados serão visto e a VIEWS é como os dados serão vistos.
+
+Váriáveis do Template
+
+Terão seu valor substituído na saída do template e seu nome deve ter aspas, caracteres alfanuméricos e o underscore "_", com a seguinte sitaxe
+
+    {{ nome_variavel }}
+
+Variáveis pode ser também um objeto complexo, um dicionario, uma lista, e para acessar um atributos deste objeto basta colocar o "."(ponto).
+
+    - {{ meu_dicionario.chave }}
+    - {{ meu_objeto.atributo }}
+    - {{ meu_objeto.metodo }}
+    - {{ minha_lista.0 }}
+
+Tags do Tamplate https://docs.djangoproject.com/en/3.0/ref/templates/builtins/
+
+ - Fazem controle como pro exemplo IFs.
+ - São usados para lógicas mais complexas.
+ - Podem retornar um valor a serem preenchidos no templates, controlar fluxos de saída, carregar informaçãos adicionais
+ - Sintaxe:
+
+    - {% tag %} conteúdo {% endtag %}
+    - {% tag param1 param2 %} conteúdo {% endtag %}
+    - {% tag %} conteúdo {% endtag %}
+    - {% tag param1 param2 %}
+
+ - Exemplo:
+
+    {% if athlete_list|length > 1 %}
+        Team: {% for athlete in athlete_list %} ... {% endfor %}
+    {% else %}
+        Athlete: {{ athlete_list.0.name }}
+    {% endif %}
+
+Filtros no template
+
+ - São usados para formatar o valor de uma variável
+ - Sintaxe:
+  
+    - {{ variavel|lower }}
+    - {{ variavel|default:"padrão"}}
+
+ - Podem ser aninhados
+    
+    - {{ variavel|random|lower }}
+
