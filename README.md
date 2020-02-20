@@ -285,3 +285,86 @@ Filtros no template
     
     - {{ variavel|random|lower }}
 
+PRIMEIRO TEMPLATE
+
+Com seu ambiente virtual ativo acesso o dir /simplemooc do seu projeto e digite o seguinte comando:
+
+    python manage.py shell
+
+É basicamente executar o shell do python, porem com o ambiente django esta carregado com suas funções e variáveis...
+
+Execute o seguinte comando com o shell em execução
+
+    from django.template import Template, Context    
+
+Context - é o conjunto de variáveis disponíveis para um determinado Template
+
+Criando o template
+
+    template = Template("Bem vindo: {{ usuario }}")
+
+Criando o contexto
+
+    context = Context({"usuario":"Davi Bernardo"})
+
+Redenrizar o Contexto com o Template
+
+    print(template.render(context))
+
+Obtem o seguinte retorno
+
+    Bem vindo: Davi Bernardo
+
+Crinado um template com o filtro lower (deixar tudo minúsculo)
+
+    template = Template("Bem vindo: {{ usuario|lower }}")
+
+    print(template.render(context))
+
+    Bem vindo: davi bernardo
+
+OBS: os tmplas serão criados em paginas .html, pois ficarão mais intuitivos.
+
+Fechado o shell
+
+    exit()
+
+PURE CSS
+
+Usaremos o pure css ao inves de bootstrap do TWITTER, apenas pra informar que existem outros framewoks html, este por exemplo e matido pela YAHOO https://purecss.io/
+
+CRIANDO O TEMPLATE
+
+É necessário criar um deiretório chamado templates dentro da nossa APP CORE, pois dentro dele ficará todos nosso templates.
+
+    /core/templates
+
+Por padrão é necessário cada app tenha ums diretório chamado de template
+
+Criando a home em nosso diretório templates
+
+    /core/templates
+                home.html
+
+
+Template home básico
+
+    <!DOCTYPE html>
+    <html lang="br">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Simple MOOC</title>
+        </head>
+        <body>
+            Usuário: {{ usuario }}
+        </body>
+    </html>
+
+View chamando o Template home básico usando o render
+
+    from django.shortcuts import render
+    from django.http import HttpResponse
+
+    def home(request):
+        return render(request, 'home.html', {'usuario': 'Fulano de Tal'})
