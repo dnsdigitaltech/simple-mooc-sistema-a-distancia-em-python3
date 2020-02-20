@@ -329,10 +329,6 @@ Fechado o shell
 
     exit()
 
-PURE CSS
-
-Usaremos o pure css ao inves de bootstrap do TWITTER, apenas pra informar que existem outros framewoks html, este por exemplo e matido pela YAHOO https://purecss.io/
-
 CRIANDO O TEMPLATE
 
 É necessário criar um deiretório chamado templates dentro da nossa APP CORE, pois dentro dele ficará todos nosso templates.
@@ -368,3 +364,43 @@ View chamando o Template home básico usando o render
 
     def home(request):
         return render(request, 'home.html', {'usuario': 'Fulano de Tal'})
+
+TEMPLATE BASE
+
+PURE CSS
+
+Usaremos o pure css ao invés de bootstrap do TWITTER, apenas pra informar que existem outros framewoks html, este por exemplo e matido pela YAHOO https://purecss.io/
+
+Implementando o layout do pure css ao meu arquivo template home.html
+
+OBS:  dentro de cada App é necessário criar um diretório chamadno static que ficará o css, js
+
+    /core/static/css/arquivos.css
+
+no 
+
+É necessário declarar o novo módulo css com o seguinte comando na cabeçalho da página
+
+    {% load static %}
+
+E com a seguinte chamanda css
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+Exemplo final da template home
+
+    <!doctype html>
+    {% load static %}
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="Simple MOOC - Uma simples plataforma de ensino a distância" />
+            <title>Simple MOOC</title>
+            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+            <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        </head>
+        <body>
+            conteudo
+        </body>
+    </html>
