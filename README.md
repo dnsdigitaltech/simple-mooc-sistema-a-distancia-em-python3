@@ -428,3 +428,76 @@ Url contato
 
     from simplemooc.core.views import home, contact
 
+HERANÇA DE TEMPLATES
+
+É interessante os templates herdarem parte de um template master. Sendo uma base padrão que os demais evitando repetição em códigos.
+
+Crie um templates base.html e nele coloquei todo o código que ser repete, ex: cabeçalho e rodapé.
+Criei a seguinte bloco dentro da class content que serirá como placeholder para os demais templates
+
+    {% block content %} {% endblock %}
+
+Nos templates que herdarão a base.html basta colocar o seguinte código no início da página
+
+    {% extends "base.html" %}
+    {% block content %}
+        .......
+        contéudo da página
+        .......
+    {% endblock content %}
+
+Template base.html
+
+    <!doctype html>
+    {% load static %}
+
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="Simple MOOC - Uma simples plataforma de ensino a distância" />
+            <title>Simple MOOC</title>
+            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+            <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        </head>
+        <body>
+            <div class="header">
+                <div class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
+                    <a class="pure-menu-heading" href="{% url 'home' %}">SIMPLE MOOC</a>
+                    <ul>
+                        <li class="pure-menu-selected"><a href="{% url 'home' %}">Início</a></li>
+                        <li><a href="#">Cursos</a></li>
+                        <li><a href="{% url 'contact' %}">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                {% block content %} 
+                {% endblock %}
+                <div class="footer">
+                    Simple MOOC - Uma simples plataforma de ensino a distância
+                </div>
+            </div>
+            <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
+        </body>
+    </html>
+
+Demais templates, neste cado contac.html
+
+    {% extends "base.html" %}
+        {% block content %}
+            <div class="pure-g-r content-ribbon">
+                <div class="pure-u-1">
+                    <h1>Fale conosco</h1>
+                    <p>Você pode entrar em contato conosco tanto por e-mail como pelas redes sociais, abaixo seguem os links para contato:</p>
+                    <h4>Links</h4>
+                    <ul>
+                        <li>E-mail: <a href="mailto:contato@simplemooc.org">contato@simplemooc.org</a></li>
+                        <li>Twitter: <a href="https://twitter.com/simplemooc">@simplemooc</a></li>
+                    </ul>
+                </div>
+            </div>
+        {% endblock %}
+
+OBS: Neste conceito diminui bastante a repetição de uma página
+
