@@ -329,6 +329,12 @@ Fechado o shell
 
     exit()
 
+OBS: O django é baseado em MTV 
+
+ - MODEL - Persistência dos dados
+ - TEMPLATES - Molde como os dados serão visualizados
+ - VIEWS - Quê dados serão visualizados
+
 CRIANDO O TEMPLATE
 
 É necessário criar um deiretório chamado templates dentro da nossa APP CORE, pois dentro dele ficará todos nosso templates.
@@ -404,3 +410,21 @@ Exemplo final da template home
             conteudo
         </body>
     </html>
+
+PÁGINA DE CONTATO
+
+Basta criar uma nova view, depois criar o arquivo contact.html e rotear o mesmo conforme os scripts abaixo:
+
+View contato
+
+    def contact(request):
+        return render(request, 'contact.html')
+
+Templates contato
+
+    contact.html
+
+Url contato
+
+    from simplemooc.core.views import home, contact
+
